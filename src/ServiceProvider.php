@@ -18,9 +18,9 @@ class ServiceProvider extends LaravelServiceProvider
 
 
     protected function setConfig(){
-        $source = realpath(__DIR__.'/config/lars_http_server.php');
+        $source = realpath(__DIR__.'/config/laravel_fast.php');
         if($this->app->runningInConsole()) {
-            $this->publishes([ $source=> config_path('lars_http_server.php')], 'lars_http_server');
+            $this->publishes([ $source=> config_path('laravel_fast.php')], 'laravel_fast');
         }
     }
 }
