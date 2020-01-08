@@ -15,7 +15,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
 
     }
-
+    
 
     protected function setConfig(){
         $source = realpath(__DIR__.'/config/laravel_fast.php');

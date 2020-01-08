@@ -11,7 +11,7 @@ class ManagerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'lars_http_server {server} {action}';
+    protected $signature = 'laravel_fast {server?} {action?}';
 
 
     //swoole http server instance
@@ -65,7 +65,15 @@ class ManagerCommand extends Command
                 (new WebSocket())->handle($this,$action);
                 break;
             default:
-                $this->error('服务不存在');
+                $help = <<<EOS
+Usage: 
+  [%s] artisan laravel_fast <service> <action>
+Arguments:
+  service               http_server|web_socket
+  action                start|stop|restart|reload|help
+EOS;
+                $this->info(sprintf($help, PHP_BINARY));
+                break;
         }
     }
 

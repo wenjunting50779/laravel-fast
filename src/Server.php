@@ -57,7 +57,7 @@ abstract class Server
             default:
                 $help = <<<EOS
 Usage: 
-  [%s] artisan lars_http_server <service> <action>
+  [%s] artisan laravel_fast <service> <action>
 Arguments:
   service               http_server|web_socket
   action                start|stop|restart|reload|help
