@@ -1,0 +1,24 @@
+{
+    "name": "wenjunting50779/laravel-fast",
+    "description": "Speed up the Laravel framework with the swoole extension!",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wenjunting",
+            "email": "wenjunting50779@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelFast\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelFast\\test": "tests/"
+        }
+    }
+}
