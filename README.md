@@ -1,7 +1,7 @@
 <h2 align="center"> Laravel-Fast </h2>
 <p align="center"> 使用swoole加速laravel框架.</p>
 
-##简介
+## 简介
 - 使用swoole作为后端http server来加速laravel框架，一次性加载文件到内存。
 - 基于swoole开发的web_socket服务端。
 ## 安装
@@ -33,7 +33,7 @@ protected $commands = [
 ],
 ```
 
-###使用
+### 使用
 ```shell
 $ php artisan laravel_fast help  //获取帮助信息
   ,--,                                                                                                                  
