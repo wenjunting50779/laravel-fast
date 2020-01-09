@@ -137,7 +137,7 @@ EOS;
      */
     public function setCofig($server = 'http_server'): void
     {
-        $config       = config('lars_http_server') ?? require_once __DIR__ . '/config/laravel_fast.php';
+        $config       = config('laravel_fast') ?? require_once __DIR__ . '/config/laravel_fast.php';
         $this->config = $config[$server];
     }
 

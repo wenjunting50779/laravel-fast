@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>websocket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <style>
+        .right-content > span {
+            background: #99ff99;
+            width: auto;
+            display: inline-block !important;
+            text-align: left;
+            padding: 10px;
+            margin-right: -28px;
+            border-radius: 3px;
+        }
+
+        .input-div {
+            height: 54px;
+            background: #e1e1e8;
+        }
+
+        #message {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="container big-box">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">LIM</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="input-div">
+            <form class="form-inline" onsubmit="return false">
+                <div class="form-group" style="margin: 12px 10px;width: 85%">
+                    <input type="text" class="form-control" id="message" placeholder="请输入消息内容">
+                </div>
+                <button type="submit" class="btn btn-success" onclick="send($('#message').val())">发送</button>
+            </form>
+        </div>
+    </div>
+    <div class="row" id="msg">
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script>
+    function send(content) {
+        var data = new Object();
+        data.msg = content;
+        websocket.send(JSON.stringify(data));
+    }
+
+    var wsServer = 'ws://192.168.33.10:9502';
+    var websocket = new WebSocket(wsServer);
+
+    websocket.onopen = function (evt) {
+        console.log("Connected to WebSocket server successful.");
+    };
+
+    websocket.onclose = function (evt) {
+        console.log("Disconnected");
+    };
+
+    websocket.onmessage = function (evt) {
+        $('#msg').append('<p>'+evt.data+'</p>')
+    };
+
+    websocket.onerror = function (evt, e) {
+        console.log('Error occured: ' + evt.data);
+    };
+
+</script>
+</html>

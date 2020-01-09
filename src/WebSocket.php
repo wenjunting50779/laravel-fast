@@ -3,9 +3,6 @@
 
 namespace LaravelFast;
 
-
-use Symfony\Component\Console\Command\Command;
-
 class WebSocket extends Server
 {
     public function __construct()
@@ -33,30 +30,27 @@ class WebSocket extends Server
             'log_file'      => $this->config['log_file'],
             'log_level'     => 3, //日志等级 notice
         ]);
+
+        //是否配置了实现WebSocketInterface接口且存在
+        if (!$this->config['web_socket_implements'] || !class_exists($this->config['web_socket_implements'])) {
+            throw new \Exception('please implement ' . WebSocketInterface::class . ' interface.');
+        }
+        $webSocketImplements = new $this->config['web_socket_implements'];
+        //是否实现了websocket接口
+        if (!$webSocketImplements instanceof WebSocketInterface) {
+            throw new \Exception('please implement ' . WebSocketInterface::class . ' interface.');
+        }
         //绑定回调函数
-        $this->server->on('open', [$this, 'onOpen']);
+        $this->server->on('open', [$webSocketImplements, 'onOpen']);
 
-        $this->server->on('message', [$this, 'onMessage']);
+        $this->server->on('message', [$webSocketImplements, 'onMessage']);
 
-        $this->server->on('close', [$this, 'onClose']);
+        $this->server->on('close', [$webSocketImplements, 'onClose']);
 
         $this->command->info("\r\nswoole socket process created successful!\r\n");
 
         $this->server->start();
     }
-
-
-    public function onOpen(){
-
-    }
-    public function onMessage(){
-
-    }
-
-    public function onClose(){
-
-    }
-
 
 
 }
